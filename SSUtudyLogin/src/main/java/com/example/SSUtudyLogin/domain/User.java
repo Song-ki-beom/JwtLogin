@@ -16,11 +16,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long authId;
 
     @Column(length = 100, nullable = false, unique = true)
-    private String email;
+    private String loginId;
 
     @Column(length = 300, nullable = false)
-    private String password;
+    private String passwd;
 }
