@@ -22,6 +22,7 @@ public class UserController {
     // 회원가입
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> user) {
+
         return userRepository.save(User.builder()
                 .authId(user.get("auth_id"))
                 .passwd(passwordEncoder.encode(user.get("passwd")))

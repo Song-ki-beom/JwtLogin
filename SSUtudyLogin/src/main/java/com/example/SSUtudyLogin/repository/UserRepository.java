@@ -13,3 +13,18 @@ Optional<User> findByAuthId(String authId);
 //        ID	BIGINT(19)	NO	PRI	NEXT VALUE FOR "PUBLIC"."SYSTEM_SEQUENCE_02706EC2_CD3C_4BBD_B25F_1DA33A316716"
 //        AUTH_ID	VARCHAR(255)	NO		NULL
 //        PASSWD	VARCHAR(255)	NO		NULL
+
+
+//    CREATE TABLE USER (
+//        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+//        auth_id VARCHAR(255) NOT NULL,
+//        passwd VARCHAR(255) NOT NULL
+//
+//);
+
+//    CREATE TABLE user_roles (
+//        user_id BIGINT,
+//        roles VARCHAR(255),
+//    PRIMARY KEY (user_id, roles),
+//    FOREIGN KEY (user_id) REFERENCES user(id)
+//        );
