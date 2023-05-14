@@ -16,15 +16,15 @@ import java.util.Map;
 @RestController
 public class UserController {
     private final PasswordEncoder passwordEncoder;
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
     // 회원가입
     @PostMapping("/join")
     public Long join(@RequestBody Map<String, String> user) {
         return userRepository.save(User.builder()
-                .authId(user.get("authId"))
-                .passwd(passwordEncoder.encode(user.get("password")))
+                .authId(user.get("auth_id"))
+                .passwd(passwordEncoder.encode(user.get("passwd")))
                 .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 USER 로 설정
                 .build()).getId();
     }
@@ -32,12 +32,22 @@ public class UserController {
     // 로그인
     @PostMapping("/login")
     public String login(@RequestBody Map<String, String> user) {
-        User member = userRepository.findByAuthId(user.get("authId"))
+        User member = userRepository.findByAuthId(user.get("auth_id"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 id 입니다."));
+        System.out.println("----"+member.getUsername());
+        System.out.println("----"+member.getRoles());
+
         if (!passwordEncoder.matches(user.get("passwd"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
+
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+    }
+    @PostMapping("/user/authtest")
+    public String authtest() {
+
+
+        return "auth success";
     }
 
 

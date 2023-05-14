@@ -1,5 +1,6 @@
 package com.example.SSUtudyLogin.domain;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,14 +27,17 @@ public class User implements UserDetails {
     private Long id;
 
 
-    @Column(length = 100, nullable = false, unique = true)
+    @Column(name = "auth_id",length = 100, nullable = false, unique = true)
+    @NotNull
     private String authId;
 
-    @Column(length = 300, nullable = false)
+    @Column(name = "passwd",length = 300, nullable = false)
+    @NotNull
     private String passwd;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
+    @NotNull
     private List<String> roles = new ArrayList<>();
 
     @Override

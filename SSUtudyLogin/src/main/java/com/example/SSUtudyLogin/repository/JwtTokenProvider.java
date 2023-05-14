@@ -35,12 +35,16 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
+
     // JWT 토큰 생성
     public String createToken(String userPk, List<String> roles) {
+
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
         Date now = new Date();
-        return Jwts.builder()
+
+
+       return Jwts.builder()
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(now) // 토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + tokenValidTime)) // set Expire Time
