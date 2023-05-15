@@ -44,7 +44,7 @@ public class UserController {
 
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
-    @PostMapping("/user/authtest")
+    @PostMapping("/authtest")
     public String authtest() {
 
 

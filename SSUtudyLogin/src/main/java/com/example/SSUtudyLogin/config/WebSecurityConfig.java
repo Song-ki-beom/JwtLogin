@@ -32,8 +32,9 @@ public class WebSecurityConfig  { //스프링 시큐리티 필터 사용함을 �
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().permitAll()
+                .antMatchers("/join").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/**").hasRole("USER")
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
