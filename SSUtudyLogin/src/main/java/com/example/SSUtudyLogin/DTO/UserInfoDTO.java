@@ -32,7 +32,7 @@ public class UserInfoDTO {
     private String department;
 
 
-    private List<CategoryUser> categories = new ArrayList<>();
+    private List<String> categories = new ArrayList<>();
 
 
 }

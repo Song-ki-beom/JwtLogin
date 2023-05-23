@@ -50,7 +50,8 @@ public class User implements UserDetails {
     @NotNull
     private List<String> roles = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    //@ElementCollection(fetch = FetchType.EAGER)
+    //@CollectionTable(name="category_Users", joinColumns = @JoinColumn(name= "id", referencedColumnName = "id"))
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CategoryUser> categoryUsers = new ArrayList<>();
 

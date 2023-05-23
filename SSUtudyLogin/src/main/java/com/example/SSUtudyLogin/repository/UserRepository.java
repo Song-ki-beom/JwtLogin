@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
 Optional<User> findBystudentId(String studentId);
 
+
+
 }
 //    FIELD  	TYPE  	NULL  	KEY  	DEFAULT
 //        ID	BIGINT(19)	NO	PRI	NEXT VALUE FOR "PUBLIC"."SYSTEM_SEQUENCE_02706EC2_CD3C_4BBD_B25F_1DA33A316716"
