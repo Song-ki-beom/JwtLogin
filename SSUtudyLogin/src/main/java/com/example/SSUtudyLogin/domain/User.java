@@ -27,18 +27,32 @@ public class User implements UserDetails {
     private Long id;
 
 
-    @Column(name = "auth_id",length = 100, nullable = false, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     @NotNull
-    private String authId;
+    private String studentId;
 
-    @Column(name = "passwd",length = 300, nullable = false)
+    @Column(length = 300, nullable = false)
     @NotNull
-    private String passwd;
+    private String password;
+
+    @Column(length = 300, nullable = false)
+    private String name;
+
+    @Column(length = 300, nullable = false)
+    private int grade;
+
+    @Column(length = 300, nullable = false)
+    private String department;
+
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     @NotNull
     private List<String> roles = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CategoryUser> categoryUsers = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -49,12 +63,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return passwd;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return authId;
+        return studentId;
     }
 
     @Override
