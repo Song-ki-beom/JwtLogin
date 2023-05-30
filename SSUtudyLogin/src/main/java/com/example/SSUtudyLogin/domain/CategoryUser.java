@@ -1,14 +1,15 @@
 package com.example.SSUtudyLogin.domain;
-
-
-
-import lombok.Getter;
+import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 @Getter
+@Setter
 public class CategoryUser {
+
 
     @Id @GeneratedValue
     @Column(name = "category_user_id")
@@ -22,8 +23,10 @@ public class CategoryUser {
     @JoinColumn(name = "category_id")
     private Category category;
 
+
     public CategoryUser(User user, Category category) {
-        this.user = user;
-        this.category = category;
+         this.user =  user;
+         this.category = category;
+
     }
 }

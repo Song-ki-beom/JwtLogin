@@ -1,10 +1,7 @@
 package com.example.SSUtudyLogin.domain;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Entity
 public class User implements UserDetails {
@@ -50,10 +47,33 @@ public class User implements UserDetails {
     @NotNull
     private List<String> roles = new ArrayList<>();
 
-    //@ElementCollection(fetch = FetchType.EAGER)
-    //@CollectionTable(name="category_Users", joinColumns = @JoinColumn(name= "id", referencedColumnName = "id"))
+
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CategoryUser> categoryUsers = new ArrayList<>();
+
+    public User(Long id, String studentId, String password, String name, int grade, String department, List<String> roles, List<CategoryUser> categoryUsers) {
+        this.id = id;
+        this.studentId = studentId;
+        this.password = password;
+        this.name = name;
+        this.grade = grade;
+        this.department = department;
+        this.roles = roles;
+        this.categoryUsers = categoryUsers;
+    }
+
+    public List<CategoryUser> getCategoryUsers() {
+        return categoryUsers;
+    }
+
+    public void setCategoryUsers(List<CategoryUser> categoryUsers) {
+        this.categoryUsers = categoryUsers;
+    }
+
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
